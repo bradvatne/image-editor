@@ -26,8 +26,8 @@ export default function Canvas({ image }) {
   };
 
   const handleDragMouseMove = (e: React.MouseEvent) => {
-    const imageBox = imageRef.current.getBoundingClientRect();
-    const canvasBox = canvasRef.current.getBoundingClientRect();
+    const imageBox: DOMRect = imageRef.current.getBoundingClientRect();
+    const canvasBox: DOMRect = canvasRef.current.getBoundingClientRect();
     const { x, y } = getMouseMovement(
       e.clientX,
       e.clientY,
@@ -45,7 +45,6 @@ export default function Canvas({ image }) {
     setDragging(false);
   };
 
-
   const imageRef: React.MutableRefObject<HTMLImageElement> = useRef(null);
   const canvasRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
 
@@ -56,7 +55,6 @@ export default function Canvas({ image }) {
           <img
             ref={imageRef}
             src={image}
-            className="image"
             onMouseDown={(e) => {
               e.stopPropagation();
               handleDragMouseDown(e);
@@ -76,23 +74,11 @@ export default function Canvas({ image }) {
       <style jsx>
         {`
           .image-container {
-            overflow: hidden;
-            resize: both;
-            overflow: hidden;
-            padding: 10px;
-            width: 300px;
-            height: 300px;
-            max-width: 820px;
-            max-height: 820px;
-            transform: translateX(${imagePosition.x-10}px)
-              translateY(${imagePosition.y-10}px);
+            transform: translateX(${imagePosition.x - 10}px)
+              translateY(${imagePosition.y - 10}px);
           }
 
-          .image {
-            cursor: move;
-            object-fit: fill;
-            
-          }
+         
         `}
       </style>
     </div>
