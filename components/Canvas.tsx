@@ -3,6 +3,7 @@ import { Coordinates } from "../types";
 import getMouseMovement from "./../utils/getMouseMovement";
 
 export default function Canvas({ image }) {
+  //State Variables
   const [dragging, setDragging] = useState<boolean>(false);
   const [dragStartPosition, setDragStartPosition] = useState<Coordinates>({
     x: 0,
@@ -17,6 +18,7 @@ export default function Canvas({ image }) {
     y: 0,
   });
 
+  //On mouse down, store the mouse's starting position and set dragging to true
   const handleDragMouseDown = (e: React.MouseEvent) => {
     setDragStartPosition({
       x: e.clientX,
@@ -25,6 +27,7 @@ export default function Canvas({ image }) {
     setDragging(true);
   };
 
+  //Fires while dragging is true, calculates mouse travel from starting click position using getMouseMovement
   const handleDragMouseMove = (e: React.MouseEvent) => {
     const imageBox: DOMRect = imageRef.current.getBoundingClientRect();
     const canvasBox: DOMRect = canvasRef.current.getBoundingClientRect();
@@ -40,11 +43,13 @@ export default function Canvas({ image }) {
     setImagePosition({ x, y });
   };
 
+  //Releases drag
   const handleDragMouseUp = (e: React.MouseEvent) => {
     setDragEndPosition({ x: imagePosition.x, y: imagePosition.y });
     setDragging(false);
   };
 
+  //Refs
   const imageRef: React.MutableRefObject<HTMLImageElement> = useRef(null);
   const canvasRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
 
@@ -77,8 +82,6 @@ export default function Canvas({ image }) {
             transform: translateX(${imagePosition.x - 10}px)
               translateY(${imagePosition.y - 10}px);
           }
-
-         
         `}
       </style>
     </div>

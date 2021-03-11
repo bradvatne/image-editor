@@ -1,5 +1,6 @@
 import { Coordinates } from "../types";
 
+//Calculates drag travelled, limits drag from exceeding border of Canvas
 export default function getMouseMovement(
   clientX: number,
   clientY: number,
